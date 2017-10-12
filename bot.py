@@ -1,5 +1,5 @@
 import telebot
-import config
+#import config
 import time
 import requests
 import lxml.html
