@@ -7,8 +7,11 @@ import os
 
 s3 = S3Connection(os.environ['token'], os.environ['URL'])
 
+token = os.environ.get('token')
+URL = os.environ.get('URL')
+
 #bot = telebot.TeleBot(config.token)
-bot = telebot.TeleBot(os.environ['token'])
+bot = telebot.TeleBot(token)
 
 
 
@@ -27,7 +30,7 @@ def bkwork(message):
         bot.send_message(message.chat.id, 'Вы начали мониторинг')
         while True:
             session = requests.session()
-            r = session.post(os.environ['URL'], data=formdata)
+            r = session.post(URL, data=formdata)
 
             text = r.text
             doc = lxml.html.document_fromstring(text)
