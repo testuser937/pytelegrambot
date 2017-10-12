@@ -3,6 +3,7 @@ import time
 import requests
 import lxml.html
 from boto.s3.connection import S3Connection
+import os
 
 s3 = S3Connection(os.environ['token'], os.environ['URL'])
 
