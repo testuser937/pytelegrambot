@@ -1,11 +1,11 @@
 import telebot
-#import config
 import time
 import requests
 import lxml.html
 
 #bot = telebot.TeleBot(config.token)
 bot = telebot.TeleBot(token)
+
 
 
 
