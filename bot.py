@@ -2,6 +2,9 @@ import telebot
 import time
 import requests
 import lxml.html
+from boto.s3.connection import S3Connection
+
+s3 = S3Connection(os.environ['token'], os.environ['URL'])
 
 #bot = telebot.TeleBot(config.token)
 bot = telebot.TeleBot(token)
