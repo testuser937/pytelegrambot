@@ -4,8 +4,9 @@ import time
 import requests
 import lxml.html
 
-bot = telebot.TeleBot(config.token)
-URL = config.URL
+#bot = telebot.TeleBot(config.token)
+bot = telebot.TeleBot(token)
+
 
 
 formdata = {
