@@ -1,20 +1,14 @@
+# -*- coding: utf-8 -*-
 import telebot
 import time
 import requests
 import lxml.html
-from boto.s3.connection import S3Connection
+import config
+import datetime
 import os
 
-s3 = S3Connection(os.environ['token'], os.environ['URL'])
-
-token = os.environ.get('token')
-URL = os.environ.get('URL')
-
-#bot = telebot.TeleBot(config.token)
-bot = telebot.TeleBot(token)
-
-
-
+URL = config.URL
+bot = telebot.TeleBot(config.token)
 
 formdata = {
     'inp:Login': '',
@@ -31,7 +25,6 @@ def bkwork(message):
         while True:
             session = requests.session()
             r = session.post(URL, data=formdata)
-
             text = r.text
             doc = lxml.html.document_fromstring(text)
             res = []
@@ -44,13 +37,12 @@ def bkwork(message):
                     res.append((s))
 
             if "Ждетпроверки" not in res:
+                bot.send_message(message.chat.id, 'Проверил!')
                 for item in doc.xpath("//td/textarea"):
                     bot.send_message(message.chat.id, item.text)
                 return
-            else:
-                bot.send_message(message.chat.id, 'Пока нету')
-            time.sleep(5)
-
+                
+            time.sleep(1200)
 
 
 @bot.message_handler(commands=['setlogin'])
@@ -75,6 +67,10 @@ def password(message):
     else:
         bot.send_message(message.chat.id, 'Попробуйте еще раз')
 
+        
+@bot.message_handler(commands=['time'])
+def repeat_all_messages(message): # Название функции не играет никакой роли, в принципе
+    bot.send_message(message.chat.id, datetime.datetime.now())
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
