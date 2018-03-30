@@ -69,7 +69,7 @@ def password(message):
 
         
 @bot.message_handler(commands=['time'])
-def repeat_all_messages(message): # Название функции не играет никакой роли, в принципе
+def repeat_all_messages(message):
     bot.send_message(message.chat.id, datetime.datetime.now())
 
 if __name__ == '__main__':
